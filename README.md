@@ -5,8 +5,6 @@
 It will communicate with Angular front by REST.
 </p>
 
-<br>
-
 <b>Stack/assumptions:</b>
 <ul>
   <li>Spring Boot</li>
