@@ -1,14 +1,19 @@
 # air-quality-monitor-backend
 
-Goal:
-backend of an app that regularely checks public air quality data and can graph them and send warnings to users when the air quality is bad.
+<p>
+<b>Goal:</b> backend of an app that regularely checks public air quality data and can graph them and send warnings to users when the air quality is bad.
 It will communicate with Angular front by REST.
+</p>
 
-Stack:
-Spring Boot
-Spring Data
-Spring Security + JWT authentication
-MongoDB / Firebase
-REST API
+<br>
+
+<b>Stack/assumptions:</b>
+<ul>
+  <li>Spring Boot</li>
+  <li>Spring Data</li>
+  <li>Spring Security + JWT authentication</li>
+  <li>MongoDB / Firebase</li>
+  <li>REST API</li>
+</ul>
 
 To be deployed on aws EC2 (?)
