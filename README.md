@@ -12,6 +12,7 @@ It will communicate with Angular front by REST.
   <li>Spring Security + JWT authentication</li>
   <li>MongoDB / Firebase</li>
   <li>REST API</li>
+  <li>Spock</li>
 </ul>
 
 To be deployed on aws EC2 (?)
