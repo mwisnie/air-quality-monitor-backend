@@ -2,9 +2,12 @@ package mwisnie.project.airqualitymonitorbackend.controller;
 
 import lombok.RequiredArgsConstructor;
 import mwisnie.project.airqualitymonitorbackend.entity.User;
-import mwisnie.project.airqualitymonitorbackend.service.user.UserServiceImplementation;
+import mwisnie.project.airqualitymonitorbackend.listener.OnRegistrationEvent;
+import mwisnie.project.airqualitymonitorbackend.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
 
@@ -13,7 +16,10 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserServiceImplementation userService;
+    private final UserServiceImpl userService;
+
+    @Autowired
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @GetMapping()
     public List<User> getAllUsers() {
@@ -21,13 +27,24 @@ public class UserController {
     }
 
     @GetMapping("/api/users/{id}")
-    public User getUserById(@PathVariable("id") Long id) {
+    public User getUserById(@PathVariable("id") String id) {
         return userService.getUserById(id).orElse(null);
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user).orElse(null);
+    public User createUser(@RequestBody User user, WebRequest request) {
+        //if username exists, throw throw error
+
+        User createdUser = userService.createUser(user).orElse(null);
+        if (createdUser == null) {
+            //todo: throw specific error
+            return null;
+        }
+
+        String appUrl = request.getContextPath();
+        applicationEventPublisher.publishEvent(new OnRegistrationEvent(createdUser, appUrl));
+
+        return createdUser;
     }
 
     @PutMapping
@@ -36,7 +53,7 @@ public class UserController {
     }
 
     @DeleteMapping("/api/users/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    public void deleteUser(@PathVariable String id) {
         userService.deleteUserById(id);
     }
 

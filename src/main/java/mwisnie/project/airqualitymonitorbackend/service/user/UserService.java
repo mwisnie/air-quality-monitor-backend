@@ -9,12 +9,12 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    Optional<User> getUserById(Long id);
+    Optional<User> getUserById(String id);
 
     Optional<User> createUser(User user);
 
     Optional<User> updateUser(User user);
 
-    void deleteUserById(Long id);
+    void deleteUserById(String id);
 
 }
