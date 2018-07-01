@@ -21,13 +21,19 @@ public class UserActivationTokenServiceImpl implements UserActivationTokenServic
     private final UserActivationTokenRepository tokenRepository;
 
     @Override
-    public void createEmailVerificationToken(String userId, String token) {
+    public void createUserActivationToken(String userId, String token) {
         UserActivationToken userActivationToken = new UserActivationToken(userId, token);
         tokenRepository.save(userActivationToken);
     }
 
     @Override
-    public Optional<User> getUserByToken(String token) {
-        return Optional.empty();
+    public UserActivationToken getAccountActivationTokenByToken(String token) {
+        return tokenRepository.getUserActivationTokenByToken(token).orElse(null);
     }
+
+    @Override
+    public User getUserByToken(UserActivationToken activationToken) {
+        return userRepository.findById(activationToken.getUserId()).orElse(null);
+    }
+
 }

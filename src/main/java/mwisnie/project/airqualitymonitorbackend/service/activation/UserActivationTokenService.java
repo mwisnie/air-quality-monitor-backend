@@ -1,13 +1,14 @@
 package mwisnie.project.airqualitymonitorbackend.service.activation;
 
 import mwisnie.project.airqualitymonitorbackend.entity.User;
-
-import java.util.Optional;
+import mwisnie.project.airqualitymonitorbackend.entity.UserActivationToken;
 
 public interface UserActivationTokenService {
 
-    void createEmailVerificationToken(String userId, String token);
+    void createUserActivationToken(String userId, String token);
 
-    Optional<User> getUserByToken(String token);
+    UserActivationToken getAccountActivationTokenByToken(String token);
+
+    User getUserByToken(UserActivationToken token);
 
 }

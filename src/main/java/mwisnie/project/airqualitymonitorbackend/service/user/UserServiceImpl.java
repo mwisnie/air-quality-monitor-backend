@@ -22,18 +22,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserById(String id) {
-        return userRepository.findById(id);
+    public User getUserById(String id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Optional<User> createUser(User user) {
-        return Optional.of(userRepository.save(user));
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override
-    public Optional<User> updateUser(User user) {
-        return Optional.of(userRepository.save(user));
+    public User updateUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override

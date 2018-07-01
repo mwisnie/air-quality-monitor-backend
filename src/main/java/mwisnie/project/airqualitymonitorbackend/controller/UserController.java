@@ -11,7 +11,8 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
 
-@RestController("/api/users")
+@RestController
+@RequestMapping(path = {"/api/users", "/api/users/"})
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class UserController {
 
@@ -21,21 +22,21 @@ public class UserController {
     @Autowired
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    @GetMapping()
+    @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/api/users/{id}")
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable("id") String id) {
-        return userService.getUserById(id).orElse(null);
+        return userService.getUserById(id);
     }
 
     @PostMapping
     public User createUser(@RequestBody User user, WebRequest request) {
         //if username exists, throw throw error
 
-        User createdUser = userService.createUser(user).orElse(null);
+        User createdUser = userService.createUser(user);
         if (createdUser == null) {
             //todo: throw specific error
             return null;
@@ -49,10 +50,10 @@ public class UserController {
 
     @PutMapping
     public User updateUser(@RequestBody User user) {
-        return userService.updateUser(user).orElse(null);
+        return userService.updateUser(user);
     }
 
-    @DeleteMapping("/api/users/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable String id) {
         userService.deleteUserById(id);
     }

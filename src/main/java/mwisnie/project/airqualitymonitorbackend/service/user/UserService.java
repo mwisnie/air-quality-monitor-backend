@@ -9,11 +9,11 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    Optional<User> getUserById(String id);
+    User getUserById(String id);
 
-    Optional<User> createUser(User user);
+    User createUser(User user);
 
-    Optional<User> updateUser(User user);
+    User updateUser(User user);
 
     void deleteUserById(String id);
 
