@@ -40,4 +40,9 @@ class UtilityController {
         return user;
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
+
 }
