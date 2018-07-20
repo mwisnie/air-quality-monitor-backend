@@ -1,6 +1,5 @@
 package mwisnie.project.airqualitymonitorbackend.service.email;
 
-import lombok.RequiredArgsConstructor;
 import mwisnie.project.airqualitymonitorbackend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -10,29 +9,32 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EmailServiceImpl implements EmailService {
 
-    private static final String MAIL_SUBJECT = "Air Quality Monitor account creation confirmation";
+    private static final String IP_CHECK_SERVICE = "http://checkip.amazonaws.com";
 
     //configured by SpringBoot with application.properties
     @Autowired
-    private final JavaMailSenderImpl mailSender;
+    private JavaMailSenderImpl mailSender;
+
+    @Autowired
+    private EmailConfig emailConfig;
 
     @Override
     public void sendActivationEmail(User user, String token) {
         SimpleMailMessage message = new SimpleMailMessage();
 
         message.setTo(user.getEmail());
-        message.setSubject(MAIL_SUBJECT);
+        message.setSubject(emailConfig.getSubject());
 
         String machineAddress = getExternalIPAddress();
-        message.setText("todo: from properties" + machineAddress + "/activateAccount?token=" + token);
+        String activationLink = machineAddress + "/confirmRegistration?token=" + token;
+
+        message.setText(String.format(emailConfig.getText(), user.getUsername(), activationLink));
 
         mailSender.send(message);
     }
@@ -42,7 +44,7 @@ public class EmailServiceImpl implements EmailService {
         URL checkIPUrl = null;
 
         try {
-            checkIPUrl = new URL("http://checkip.amazonaws.com");
+            checkIPUrl = new URL(IP_CHECK_SERVICE);
         } catch (MalformedURLException e) {
             //should never happen, anyway, todo: throw specific error
         }

@@ -42,9 +42,7 @@ public class UserController {
             return null;
         }
 
-        String appUrl = request.getContextPath();
-        applicationEventPublisher.publishEvent(new OnRegistrationEvent(createdUser, appUrl));
-
+        applicationEventPublisher.publishEvent(new OnRegistrationEvent(createdUser));
         return createdUser;
     }
 

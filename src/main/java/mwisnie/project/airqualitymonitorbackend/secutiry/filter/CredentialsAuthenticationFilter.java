@@ -28,28 +28,27 @@ public class CredentialsAuthenticationFilter extends UsernamePasswordAuthenticat
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("TRYING TO GET USERNAME NAD PASS AND AUTH WITH IT");
+
         try {
             User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
 
             UsernamePasswordAuthenticationToken authenticationToken
-               = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>());
+                    = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>());
 
             return authenticationManager.authenticate(authenticationToken);
 
         } catch (IOException e) {
             // throw error
-            System.out.println("error in CredentialsAuthenticationFilter; todo: throw it");
+            System.out.println("error in CredentialsAuthenticationFilter; TODO: throw it");
             return null;
         }
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-                                           Authentication auth) throws IOException, ServletException {
-        System.out.println("SUCCESFUL AUTH WITH USERNAME AND PASS - MAKING TOKEN");
+                                            Authentication auth) throws IOException, ServletException {
         String jwtToken = Jwts.builder()
-                .setSubject(( (org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername())
+                .setSubject(((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + SecurityConfiguration.TOKEN_EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SecurityConfiguration.JWT_SECRET.getBytes())
                 .compact();

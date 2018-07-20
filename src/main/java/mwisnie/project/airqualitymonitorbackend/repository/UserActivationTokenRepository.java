@@ -11,6 +11,4 @@ public interface UserActivationTokenRepository extends MongoRepository<UserActiv
 
     Optional<UserActivationToken> getUserActivationTokenByToken(String token);
 
-    Optional<String> getUserIdByToken(String token);
-
 }

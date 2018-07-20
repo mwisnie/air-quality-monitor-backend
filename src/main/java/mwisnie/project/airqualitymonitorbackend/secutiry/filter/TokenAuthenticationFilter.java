@@ -23,7 +23,6 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
                                     throws IOException, ServletException {
-        System.out.println("\n\nTOKEN AUTHENTICATION");
         String authenticationHeader = request.getHeader(SecurityConfiguration.AUTHORIZATION_HEADER);
 
         if (authenticationHeader == null || !authenticationHeader.startsWith(SecurityConfiguration.AUTHORIZATION_PREFIX)) {
