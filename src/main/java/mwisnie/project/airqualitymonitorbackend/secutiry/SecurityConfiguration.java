@@ -26,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public static final String REGISTRATION_CONFIRMATION_URL = "/confirmRegistration";
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String AUTHORIZATION_PREFIX = "Bearer ";
-    public static final long TOKEN_EXPIRATION_TIME = (long) 1000 * 60 * 60;
+    public static final long TOKEN_EXPIRATION_TIME = (long) 1000 * 60 * 60 * 5;
 
     public static String JWT_SECRET;
 

@@ -1,4 +1,4 @@
-package mwisnie.project.airqualitymonitorbackend.listener;
+package mwisnie.project.airqualitymonitorbackend.event;
 
 import lombok.RequiredArgsConstructor;
 import mwisnie.project.airqualitymonitorbackend.entity.User;

@@ -6,6 +6,7 @@ import mwisnie.project.airqualitymonitorbackend.entity.UserActivationToken;
 import mwisnie.project.airqualitymonitorbackend.service.activation.UserActivationTokenServiceImpl;
 import mwisnie.project.airqualitymonitorbackend.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,8 +42,8 @@ class UtilityController {
     }
 
     @GetMapping("/test")
-    public String test() {
-        return "test";
+    public String initialize(Authentication auth) {
+        return "lala";
     }
 
 }
