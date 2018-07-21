@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = {"/api/users", "/api/users/"})
-@RequiredArgsConstructor(onConstructor = @_(@Autowired))
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
     @Autowired

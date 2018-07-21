@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -21,6 +23,8 @@ public class User {
     private String password;
 
     private String email;
+
+    private List<String> stationIds;
 
     private boolean active;
 

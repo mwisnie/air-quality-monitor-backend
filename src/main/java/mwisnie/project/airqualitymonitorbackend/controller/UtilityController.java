@@ -4,12 +4,15 @@ import lombok.RequiredArgsConstructor;
 import mwisnie.project.airqualitymonitorbackend.entity.User;
 import mwisnie.project.airqualitymonitorbackend.entity.UserActivationToken;
 import mwisnie.project.airqualitymonitorbackend.service.activation.UserActivationTokenServiceImpl;
+import mwisnie.project.airqualitymonitorbackend.service.data.AirQualityDataServiceImpl;
 import mwisnie.project.airqualitymonitorbackend.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -20,6 +23,9 @@ class UtilityController {
 
     @Autowired
     private final UserServiceImpl userService;
+
+    @Autowired
+    private final AirQualityDataServiceImpl dataService;
 
     @GetMapping("/confirmRegistration")
     public User confirmRegistration(@RequestParam("token") String token) {
@@ -43,7 +49,8 @@ class UtilityController {
 
     @GetMapping("/test")
     public String initialize(Authentication auth) {
-        return "lala";
+        System.out.println(dataService.getDataForAllStations(Arrays.asList("379")));
+        return "la";
     }
 
 }
