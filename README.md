@@ -16,7 +16,7 @@
 <b>Stack:</b>
 <ul>
   <b>Backend:</b>
-  <br><br>
+  <br>
   
   <li>Spring Boot</li>
   <li>Spring Data</li>
@@ -27,7 +27,7 @@
   
   <br>
   <b>Frontend:</b>
-  <br><br>
+  <br>
   
   <li>Angular 6</li>
   <li>Bootstrap 3/4</li>
