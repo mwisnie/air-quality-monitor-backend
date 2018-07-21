@@ -1,7 +1,7 @@
 # air-quality-monitor-backend
 
+<h3>Summary:</h3>
 <p>
-  <b>Summary:</b><br>
   Backend of an app that regularely checks public air quality data and can graph it and send warnings to registered users in case   of bad air quality.
   <br><br>
   Users will be able to choose up to 5 measurement stations. Scheduled periodic task will read air quality data from those stations, and if theh data exceeds certain level of contamination, email alert can be sent.
@@ -13,10 +13,10 @@
 
 <br>
 
-<b>Stack:</b>
+<h3>Stack:</h3>
 <ul>
   <b>Backend:</b>
-  <br>
+  <br><br>
   
   <li>Spring Boot</li>
   <li>Spring Data</li>
@@ -27,7 +27,7 @@
   
   <br>
   <b>Frontend:</b>
-  <br>
+  <br><br>
   
   <li>Angular 6</li>
   <li>Bootstrap 3/4</li>
@@ -36,12 +36,11 @@
 
 <br>
 
+<h3>Relase plans:</h3>
 <p>
-  <b>Relase plans:</b>
-  <br>
   1: air quality data processing and email alerts in case of bad quality
   <br>
   2: storage, processing and plotting of air quality data
-  <br>
+  <br><br>
   App will be deployed on Amazon EC2
 </p>
