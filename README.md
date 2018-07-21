@@ -3,17 +3,11 @@
 <p>
   <b>Summary:</b><br>
   Backend of an app that regularely checks public air quality data and can graph it and send warnings to registered users in case   of bad air quality.
-
-  <br><br>
-
+  <br>
   Users will be able to choose up to 5 measurement stations. Scheduled periodic task will read air quality data from those stations, and if theh data exceeds certain level of contamination, email alert can be sent.
-
-  <br><br>
-
+  <br>
   Air quality data will be provided by public API: http://powietrze.gios.gov.pl/pjp/content/api
-
-  <br><br>
-
+  <br>
   Front will be made in Angular.
 </p>
 
