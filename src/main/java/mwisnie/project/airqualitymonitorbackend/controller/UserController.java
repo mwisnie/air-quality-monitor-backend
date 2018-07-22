@@ -54,9 +54,11 @@ public class UserController {
 
     @PutMapping("/{id}")
     public User updateUser(@PathVariable("id") String id, @RequestBody User user, Authentication auth) {
+        System.out.println(user);
         if (!isAuthorized(id, auth)) {
             throw new UnauthorizedException(String.format("Not authorized to edit user %s.", id));
         }
+        System.out.println(user);
         return userService.updateUser(user);
     }
 

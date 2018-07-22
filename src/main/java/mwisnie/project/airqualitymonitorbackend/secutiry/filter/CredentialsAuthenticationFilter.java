@@ -28,8 +28,6 @@ public class CredentialsAuthenticationFilter extends UsernamePasswordAuthenticat
 
     private final AuthenticationManager authenticationManager;
 
-
-    @Autowired
     private UserServiceImpl userService;
 
     public CredentialsAuthenticationFilter(AuthenticationManager authenticationManager) {

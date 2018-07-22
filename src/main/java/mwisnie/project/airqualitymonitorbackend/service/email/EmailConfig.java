@@ -10,13 +10,19 @@ import javax.validation.constraints.NotBlank;
 @Data
 @Validated
 @Configuration
-@ConfigurationProperties(prefix = "activation-mail")
+@ConfigurationProperties(prefix = "email")
 public class EmailConfig {
 
     @NotBlank
-    private String subject;
+    private String activationSubject;
 
     @NotBlank
-    private String text;
+    private String activationText;
+
+    @NotBlank
+    private String alertSubject;
+
+    @NotBlank
+    private String alertText;
 
 }
