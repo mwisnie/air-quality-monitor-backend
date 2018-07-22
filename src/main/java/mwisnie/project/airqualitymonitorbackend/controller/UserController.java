@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody @Valid User user) {
         User createdUser = userService.createUser(user);
         if (createdUser == null) {
             throw new RegistrationException("Error - unable to create the user.");
@@ -54,11 +55,9 @@ public class UserController {
 
     @PutMapping("/{id}")
     public User updateUser(@PathVariable("id") String id, @RequestBody User user, Authentication auth) {
-        System.out.println(user);
-        if (!isAuthorized(id, auth)) {
+        if (!isAuthorized(id, auth) || !id.equals(user.getId())) {
             throw new UnauthorizedException(String.format("Not authorized to edit user %s.", id));
         }
-        System.out.println(user);
         return userService.updateUser(user);
     }
 
@@ -71,7 +70,8 @@ public class UserController {
     }
 
     private boolean isAuthorized(String id, Authentication auth) {
-        return id.equals(userService.getUserByUsername(auth.getPrincipal().toString()).getId());
+        return id.equals(userService.getUserByUsername(auth.getPrincipal().toString()).getId())
+                || isAdmin(auth);
     }
 
     private boolean isAdmin(Authentication auth) {

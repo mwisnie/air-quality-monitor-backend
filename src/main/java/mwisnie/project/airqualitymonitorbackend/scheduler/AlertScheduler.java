@@ -30,9 +30,9 @@ public class AlertScheduler {
 
 //    @Scheduled(fixedRate = APP_CHECK_RATE)
     @Scheduled(fixedRate = 10000)
-    public void scheduleTaskWithFixedRate() {
+    public void scheduleAlertTaskWithFixedRate() {
         List<User> users = userService.getAllUsers();
-        users = users.stream().filter(User::isActive).collect(Collectors.toList());
+        users = users.stream().filter(User::isActive).filter(User::isAlertOn).collect(Collectors.toList());
 
         for (User user: users) {
             List<AirQualityIndexData> dataList = dataService.getDataForAllStations(user.getStationIds());
@@ -44,7 +44,9 @@ public class AlertScheduler {
                 }
             }
 
-            emailService.sendAlertEmail(user, dataExceedingLimits);
+            if (!dataExceedingLimits.isEmpty()) {
+                emailService.sendAlertEmail(user, dataExceedingLimits);
+            }
         }
     }
 

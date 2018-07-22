@@ -52,7 +52,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) {
-        return userRepository.save(user);
+        User actualUserData = userRepository.findById(user.getId()).orElse(null);
+        if (actualUserData != null) {
+            actualUserData.setPassword(user.getPassword());
+            actualUserData.setStationIds(user.getStationIds());
+            actualUserData.setAlertOn(user.isAlertOn());
+            return userRepository.save(actualUserData);
+        }
+        return null;
     }
 
     @Override
