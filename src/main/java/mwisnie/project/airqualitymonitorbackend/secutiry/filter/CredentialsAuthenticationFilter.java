@@ -69,6 +69,8 @@ public class CredentialsAuthenticationFilter extends UsernamePasswordAuthenticat
         String userId = userService.getUserByUsername(principal.getUsername()).getId();
 
         response.addHeader(SecurityConfiguration.AUTHORIZATION_HEADER, SecurityConfiguration.AUTHORIZATION_PREFIX + jwtToken);
+        response.addHeader("Access-Control-Expose-Headers", "UserId");
+        response.addHeader("Access-Control-Expose-Headers", "Authorization");
         response.addHeader("UserId", userId);
     }
 
