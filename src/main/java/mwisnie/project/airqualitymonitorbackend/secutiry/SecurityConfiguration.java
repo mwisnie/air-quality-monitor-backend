@@ -24,6 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public static final String REGISTRATION_URL = "/api/users";
     public static final String REGISTRATION_CONFIRMATION_URL = "/confirmRegistration";
+    public static final String STATIONS_URL = "/stations";
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String AUTHORIZATION_PREFIX = "Bearer ";
     public static final long TOKEN_EXPIRATION_TIME = (long) 1000 * 60 * 60 * 5;
@@ -50,6 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, REGISTRATION_URL).permitAll()
+                .antMatchers(HttpMethod.GET, STATIONS_URL).permitAll()
                 .antMatchers(HttpMethod.GET, REGISTRATION_CONFIRMATION_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
