@@ -1,6 +1,7 @@
 package mwisnie.project.airqualitymonitorbackend.controller;
 
 import lombok.RequiredArgsConstructor;
+import mwisnie.project.airqualitymonitorbackend.entity.MeasurementPoint;
 import mwisnie.project.airqualitymonitorbackend.entity.Station;
 import mwisnie.project.airqualitymonitorbackend.entity.User;
 import mwisnie.project.airqualitymonitorbackend.entity.UserActivationToken;
@@ -10,6 +11,7 @@ import mwisnie.project.airqualitymonitorbackend.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,6 +54,11 @@ class UtilityController {
     @GetMapping("/stations")
     public List<Station> getAllMeasurementStations() {
         return dataService.getAllStations();
+    }
+
+    @GetMapping("/stations/{id}")
+    public List<MeasurementPoint> getStationDetail(@PathVariable("id") int id) {
+        return dataService.getStationDetail(id);
     }
 
     @GetMapping("/test")

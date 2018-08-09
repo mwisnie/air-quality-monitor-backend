@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = {"/api/users", "/api/users/"})
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
