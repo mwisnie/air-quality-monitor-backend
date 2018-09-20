@@ -35,7 +35,9 @@ public class AlertScheduler {
         users = users.stream().filter(User::isActive).filter(User::isAlertOn).collect(Collectors.toList());
 
         for (User user: users) {
-            List<AirQualityIndexData> dataList = dataService.getDataForAllStations(user.getStationIds());
+            List<String> stationsToProcess = new ArrayList<>();
+            stationsToProcess.addAll(user.getStationIds().keySet());
+            List<AirQualityIndexData> dataList = dataService.getDataForAllStations(stationsToProcess);
             List<AirQualityIndexData> dataExceedingLimits = new ArrayList<>();
 
             for (AirQualityIndexData data: dataList) {
