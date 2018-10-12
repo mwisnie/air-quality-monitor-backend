@@ -29,7 +29,7 @@ public class AlertScheduler {
     private UserServiceImpl userService;
 
 //    @Scheduled(fixedRate = APP_CHECK_RATE)
-    @Scheduled(fixedRate = 10000)
+//    @Scheduled(fixedRate = 10000)
     public void scheduleAlertTaskWithFixedRate() {
         List<User> users = userService.getAllUsers();
         users = users.stream().filter(User::isActive).filter(User::isAlertOn).collect(Collectors.toList());
