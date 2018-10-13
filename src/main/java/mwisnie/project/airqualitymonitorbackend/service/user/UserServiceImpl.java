@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User user) {
         User actualUserData = userRepository.findById(user.getId()).orElse(null);
         if (actualUserData != null) {
-            actualUserData.setPassword(user.getPassword());
+            actualUserData.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             actualUserData.setStationIds(user.getStationIds());
             actualUserData.setAlertOn(user.isAlertOn());
             return userRepository.save(actualUserData);

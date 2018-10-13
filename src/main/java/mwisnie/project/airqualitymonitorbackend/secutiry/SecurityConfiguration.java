@@ -22,7 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    public static final String REGISTRATION_URL = "/api/users";
+    public static final String REGISTRATION_URL = "/api/users/";
     public static final String REGISTRATION_CONFIRMATION_URL = "/confirmRegistration";
     public static final String STATIONS_URL = "/stations";
     public static final String STATION_DETAIL_URL = "/stations/*";
@@ -65,7 +65,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         final UrlBasedCorsConfigurationSource CORS_SOURCE = new UrlBasedCorsConfigurationSource();
-        CORS_SOURCE.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        CorsConfiguration corsConfig = new CorsConfiguration().applyPermitDefaultValues();
+        corsConfig.addAllowedMethod("PUT");
+        corsConfig.addAllowedMethod("DELETE");
+        CORS_SOURCE.registerCorsConfiguration("/**", corsConfig);
 
         //requests from any source permitted
         return CORS_SOURCE;
